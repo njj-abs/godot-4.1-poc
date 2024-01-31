@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://baj3jwmge78e7"]
+
+[ext_resource type="Shader" path="res://2dTexture.gdshader" id="1_t14ka"]
+[ext_resource type="Texture2D" uid="uid://btmoasaxsfwgl" path="res://wood-frame-2- crop.jpg" id="2_yuqsf"]
+[ext_resource type="Texture2D" uid="uid://bwie2t2yywwm" path="res://play.png" id="3_nmfnu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5v1o8"]
+shader = ExtResource("1_t14ka")
+shader_parameter/blend_factor = 0.9
+shader_parameter/texture_1 = ExtResource("2_yuqsf")
+shader_parameter/texture_2 = ExtResource("3_nmfnu")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_5v1o8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yuqsf")
+expand_mode = 2
