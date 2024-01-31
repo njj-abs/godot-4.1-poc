@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://n1jbky5glx4u"]
+
+[ext_resource type="Shader" path="res://disintegrate.gdshader" id="1_fhnsy"]
+[ext_resource type="Texture2D" uid="uid://djgulqvhcr6yy" path="res://godotea.png" id="2_3k627"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_abdw5"]
+shader = ExtResource("1_fhnsy")
+shader_parameter/amount = 20.0
+
+[sub_resource type="Animation" id="Animation_5vu6a"]
+resource_name = "noise"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 100.0, 0.0, 20.0]
+}
+
+[sub_resource type="Animation" id="Animation_1lxcl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [20.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8fg6"]
+_data = {
+"RESET": SubResource("Animation_1lxcl"),
+"noise": SubResource("Animation_5vu6a")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_abdw5")
+position = Vector2(165.25, 301.25)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_3k627")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_s8fg6")
+}
