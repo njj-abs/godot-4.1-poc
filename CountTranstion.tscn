@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c66dlq4j1s561"]
+
+[ext_resource type="Script" path="res://Label.gd" id="1_hluko"]
+
+[node name="CountTranstion" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_hluko")
