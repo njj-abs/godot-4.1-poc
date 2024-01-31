@@ -5,4 +5,4 @@ func set_label_text(value):
 
 func _ready():
 	var tween = create_tween()
-	tween.tween_method(set_label_text, 10, 100, 1)
+	tween.tween_method(set_label_text, 10, 100, 1).set_ease(0)
