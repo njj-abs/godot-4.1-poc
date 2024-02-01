@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://blbbj1qmad5qw"]
+
+[ext_resource type="Script" path="res://Animation/gpu_particles_3d.gd" id="1_a1mj7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftsfi"]
+lifetime_randomness = 0.53
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 8.0
+angular_velocity_min = 1.0
+angular_velocity_max = 115.0
+scale_min = 0.5
+color = Color(1, 0, 0, 1)
+hue_variation_min = 0.44
+hue_variation_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dseuw"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ge66"]
+material = SubResource("StandardMaterial3D_dseuw")
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i34dw"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ftsfi")
+draw_pass_1 = SubResource("BoxMesh_8ge66")
+script = ExtResource("1_a1mj7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i34dw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 4.136, 1.121)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 2, 0)
