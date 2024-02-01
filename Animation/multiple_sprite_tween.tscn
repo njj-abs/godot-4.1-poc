@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://duggy4ekkp3tm"]
+
+[ext_resource type="PackedScene" uid="uid://d1qgloouo0g6v" path="res://Animation/shake_tween.tscn" id="1_35t7s"]
+
+[node name="MultipleSpriteTween" type="Node2D"]
+
+[node name="ShakeTween" parent="." instance=ExtResource("1_35t7s")]
+position = Vector2(-507, -13)
+
+[node name="ShakeTween2" parent="." instance=ExtResource("1_35t7s")]
+position = Vector2(-374, -9)
