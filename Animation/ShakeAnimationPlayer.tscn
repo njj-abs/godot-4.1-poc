@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://851t16d00ggk"]
+[gd_scene load_steps=8 format=3 uid="uid://851t16d00ggk"]
 
 [ext_resource type="Texture2D" uid="uid://b56l7lp70xnmm" path="res://icon.svg" id="1_5qrwo"]
+[ext_resource type="Shader" path="res://fatty.gdshader" id="1_8ncff"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sgkw"]
+shader = ExtResource("1_8ncff")
+shader_parameter/fattyness = 1.2
 
 [sub_resource type="Animation" id="Animation_37qdf"]
 resource_name = "shake"
@@ -16,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.45, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(276, 106), Vector2(281, 106), Vector2(276, 106), Vector2(271, 106), Vector2(276, 106), Vector2(281, 106), Vector2(276, 106)]
+"values": [Vector2(276, 106), Vector2(281, 106), Vector2(276, 106), Vector2(271, 106), Vector2(276, 106), Vector2(276, 106), Vector2(276, 106)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -31,14 +36,47 @@ tracks/1/keys = {
 "values": [0.0, 0.0872665, 0.0, -0.0872665, 0.0, 0.0872665, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_7m43m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/fattyness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.2]
+}
+
+[sub_resource type="Animation" id="Animation_ncnce"]
+resource_name = "fatty"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/fattyness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.2, 1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_otdte"]
 _data = {
+"RESET": SubResource("Animation_7m43m"),
+"fatty": SubResource("Animation_ncnce"),
 "shake": SubResource("Animation_37qdf")
 }
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8sgkw")
 position = Vector2(276, 106)
 texture = ExtResource("1_5qrwo")
 
