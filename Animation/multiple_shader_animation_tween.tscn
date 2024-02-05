@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://id1c0xnvjckl"]
+
+[ext_resource type="Script" path="res://Animation/multiple_shader_animation_tween.gd" id="1_x6kt7"]
+
+[node name="MultipleShaderAnimationTween" type="Node2D"]
+script = ExtResource("1_x6kt7")
