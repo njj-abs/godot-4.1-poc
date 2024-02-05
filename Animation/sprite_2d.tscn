@@ -1,0 +1,134 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvnxfoaibxwwa"]
+
+[ext_resource type="Shader" path="res://Animation/fatty.gdshader" id="1_wpakc"]
+[ext_resource type="Texture2D" uid="uid://b56l7lp70xnmm" path="res://icon.svg" id="2_qi8gk"]
+[ext_resource type="Script" path="res://Animation/sprite_2d.gd" id="3_e8jm5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sgkw"]
+resource_local_to_scene = true
+shader = ExtResource("1_wpakc")
+shader_parameter/fattyness = 1.2
+
+[sub_resource type="Animation" id="Animation_7m43m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/fattyness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ncnce"]
+resource_name = "fatty"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/fattyness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.2, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_37qdf"]
+resource_name = "shake"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(276, 106), Vector2(281, 106), Vector2(276, 106), Vector2(271, 106), Vector2(276, 106), Vector2(276, 106), Vector2(276, 106)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0, -0.0872665, 0.0, 0.0872665, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3q2u7"]
+resource_name = "scale"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c4lt3"]
+resource_name = "fatty01"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_otdte"]
+_data = {
+"RESET": SubResource("Animation_7m43m"),
+"fatty": SubResource("Animation_ncnce"),
+"fatty01": SubResource("Animation_c4lt3"),
+"scale": SubResource("Animation_3q2u7"),
+"shake": SubResource("Animation_37qdf")
+}
+
+[node name="Sprite2D" type="Sprite2D"]
+material = SubResource("ShaderMaterial_8sgkw")
+position = Vector2(276, 106)
+texture = ExtResource("2_qi8gk")
+script = ExtResource("3_e8jm5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+movie_quit_on_finish = true
+libraries = {
+"": SubResource("AnimationLibrary_otdte")
+}
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed" binds= [NodePath("../AnimationPlayer")]]
