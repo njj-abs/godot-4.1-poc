@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var Sprite = load("res://Animation/node_2d.tscn")
+@onready var Sprite = load("res://Animation/AnimationPosition.tscn")
 
 func _ready():
 	for i in range(1,4):
