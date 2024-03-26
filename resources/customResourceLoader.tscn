@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://c68f3d8vwh3sd"]
+
+[ext_resource type="Script" path="res://resources/load.gd" id="1_7c7xm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wcbei"]
+size = Vector2(14, 12)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0pudh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eploi"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_0pudh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_lmlxy"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_7c7xm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(80, 53)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(250, 100)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport"]
+clip_contents = false
+offset_right = 150.0
+offset_bottom = 100.0
+bbcode_enabled = true
+autowrap_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_right = 150.0
+offset_bottom = 100.0
+bbcode_enabled = true
+autowrap_mode = 0
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.615662, 0.788011, 0, -0.788011, 0.615662, 0, 4, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.224951, 0.97437, 0, -0.97437, 0.224951, 0, 10.472, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("PlaneMesh_wcbei")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0, 3.16167, 2.9139)
+material_overlay = SubResource("StandardMaterial3D_eploi")
+mesh = SubResource("QuadMesh_lmlxy")
