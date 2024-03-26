@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck6ntdbrd25oo"]
+
+[ext_resource type="Shader" path="res://3doutline1.gdshader" id="1_d7t1q"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_0k5n5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlwy2"]
+render_priority = 0
+shader = ExtResource("1_d7t1q")
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtvfe"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.848048, 0.529919, 0, -0.529919, 0.848048, 0, 4, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.224951, 0.97437, 0, -0.97437, 0.224951, 0, 10.472, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_0k5n5")
+surface_material_override/0 = SubResource("ShaderMaterial_xlwy2")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("BoxMesh_jtvfe")

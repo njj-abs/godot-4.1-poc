@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhuxih0eqnknr"]
+
+[ext_resource type="Script" path="res://3DAnimation.gd" id="1_l6kmm"]
+[ext_resource type="PackedScene" uid="uid://blp4kyh1kdofx" path="res://Animation/rigid_body_3d.tscn" id="1_m4p58"]
+[ext_resource type="Texture2D" uid="uid://bwie2t2yywwm" path="res://play.png" id="3_gert8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0uq5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g02id"]
+next_pass = SubResource("ShaderMaterial_n0uq5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jyh03"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hsfsc"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcnl6"]
+albedo_color = Color(0.941176, 0.0196078, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ppr36"]
+_surfaces = [{
+"aabb": AABB(-1, 0.5, -1, 2.00001, 1.00136e-05, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": 4119,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 1, 0, 2, 0, 3, 0),
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 63, 0, 0, 0, 63, 0, 0, 128, 63, 0, 128, 255, 255, 255, 255, 255, 191, 0, 0, 128, 191, 0, 0, 0, 63, 0, 0, 128, 63, 0, 128, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 0, 0, 0, 63, 0, 0, 128, 191, 0, 128, 255, 255, 255, 255, 255, 191, 0, 0, 128, 191, 0, 0, 0, 63, 0, 0, 128, 191, 0, 128, 255, 255, 255, 255, 255, 191)
+}]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_l6kmm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_g02id")
+mesh = SubResource("PlaneMesh_jyh03")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_hsfsc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.508751, 0)
+material_override = SubResource("StandardMaterial3D_pcnl6")
+mesh = SubResource("ArrayMesh_ppr36")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.848048, 0.529919, 0, -0.529919, 0.848048, 0, 4, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.224951, 0.97437, 0, -0.97437, 0.224951, 0, 10.472, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5189, 0, 0.00944757)
+
+[node name="RigidBody3D" parent="." instance=ExtResource("1_m4p58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5189, 0.5, 0.00944757)
+
+[node name="Sprite3D" type="Sprite3D" parent="RigidBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0.6, 0)
+texture = ExtResource("3_gert8")
+
+[connection signal="mouse_entered" from="RigidBody3D" to="." method="_on_rigid_body_3d_mouse_entered"]

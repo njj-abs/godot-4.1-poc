@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://de5ry2g1sosfe"]
+
+[ext_resource type="Script" path="res://StringTexture.gd" id="1_qe0bx"]
+[ext_resource type="LabelSettings" uid="uid://bv4u6boplngqr" path="res://new_label_settings.tres" id="2_ytsqs"]
+
+[node name="StringTexture" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qe0bx")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = ExtResource("2_ytsqs")

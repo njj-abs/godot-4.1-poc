@@ -14,7 +14,21 @@ config/name="poc"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CustomImageLoader="*res://resources/customImageLoader.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
+
+[gui]
+
+theme/custom="res://new_label_settings.tres"
+theme/custom_font="res://SpaceMono-Regular.ttf"
+
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/screen_space_aa=1

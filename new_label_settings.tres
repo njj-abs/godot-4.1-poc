@@ -1,0 +1,5 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bv4u6boplngqr"]
+
+[resource]
+resource_name = "DynamicFont"
+font_size = 50

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://hefttt8y1rh2"]
+
+[ext_resource type="Script" path="res://SubViewport.gd" id="1_7uygi"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(200, 200)
+script = ExtResource("1_7uygi")
+
+[node name="Label" type="Label" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 24.0
+text = "hello"

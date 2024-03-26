@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0qj0pnc0h4cr"]
+
+[ext_resource type="Script" path="res://3doutlinemesh.gd" id="1_da4ec"]
+[ext_resource type="Shader" path="res://3dOutline.gdshader" id="1_ymdon"]
+[ext_resource type="Resource" uid="uid://f7ob21aoxpf3" path="res://resources/imageLoader.tres" id="2_sxpgu"]
+[ext_resource type="Texture2D" uid="uid://3m2vnr6rsigw" path="res://image.png" id="5_nqpsx"]
+[ext_resource type="Texture2D" uid="uid://bwie2t2yywwm" path="res://play.png" id="5_o1x0q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5vmq"]
+render_priority = 0
+shader = ExtResource("1_ymdon")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qnlgo"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6lg2y"]
+size = Vector3(1, 0.001, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_onuuw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_355k4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oy6b6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdi3f"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fbij4"]
+material = SubResource("StandardMaterial3D_xdi3f")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_da4ec")
+imageLoader = ExtResource("2_sxpgu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.615662, 0.788011, 0, -0.788011, 0.615662, -2, 4, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.224951, 0.97437, 0, -0.97437, 0.224951, 0, 10.472, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+visible = false
+material_override = SubResource("ShaderMaterial_w5vmq")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_qnlgo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_6lg2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9324, 0, 0)
+mesh = SubResource("BoxMesh_onuuw")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0468376, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_355k4")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0.13166, 0)
+visible = false
+material_overlay = SubResource("ShaderMaterial_oy6b6")
+texture = ExtResource("5_o1x0q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(229, 91)
+scale = Vector2(20, 20)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642788, -0.766044, 0, 0.766044, 0.642788, -1.42, 2, 0)
+mesh = SubResource("BoxMesh_fbij4")
+
+[node name="Sprite3D2" type="Sprite3D" parent="MeshInstance3D3"]
+transform = Transform3D(17, 0, 0, 0, -7.43094e-07, 17, 0, -17, -7.43094e-07, 0, 0.55, 0)
+texture = ExtResource("5_nqpsx")
