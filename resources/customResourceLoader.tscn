@@ -53,3 +53,12 @@ mesh = SubResource("PlaneMesh_wcbei")
 transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0, 3.16167, 2.9139)
 material_overlay = SubResource("StandardMaterial3D_eploi")
 mesh = SubResource("QuadMesh_lmlxy")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 525.0
+offset_top = 4.0
+offset_right = 592.0
+offset_bottom = 36.0
+text = "button"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed" binds= ["res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAACQAAAByZXM6Ly90b29scy9hc3NldHMvcGVuY2lsLWNyZWF0ZS5wbmc=.abs"]]
