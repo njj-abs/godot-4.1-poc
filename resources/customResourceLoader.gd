@@ -1,19 +1,25 @@
 extends ResourceFormatLoader
 class_name DynamicImageLoader
 
-func _load(resource_path: String, type: String, x: bool, y: int):
-	var image
+func getImageData(resourcePath):
 	var regex = RegEx.new()
 	regex.compile("^res://(?<processor>[^/]+)/(?<data>[^/]+)\\.abs$")
-	var result = regex.search(resource_path)
-	var imageData = (Marshalls.base64_to_variant(result.get_string("data")))
+	var result = regex.search(resourcePath)
+	
+	return (Marshalls.base64_to_variant(result.get_string("data")))
+
+func getImage(imageData):
 	var picture = Image.load_from_file(imageData.picture)
 	if imageData.get("mask", false):
 		var maskImage = Image.create(picture.get_width(), picture.get_height(), false, Image.FORMAT_RGBA8)
-		maskImage.blit_rect_mask(picture, Image.load_from_file(imageData.mask), Rect2i(0,0,picture.get_width(), picture.get_height()), Vector2i(0,0))
-		image = maskImage
+		maskImage.blit_rect_mask(picture, Image.load_from_file(imageData.mask), Rect2i(0, 0, picture.get_width(), picture.get_height()), Vector2i(0, 0))
+		return maskImage
 	else:
-		image = picture
+		return picture
+
+func _load(resource_path: String, type: String, x: bool, y: int):
+	var imageData = getImageData(resource_path)
+	var image = getImage(imageData)
 
 	return  ImageTexture.create_from_image(image)
 
