@@ -30,17 +30,31 @@ func _draw():
 	# We are going to paint with this color.
 	var godot_blue : Color = Color("478cbf")
 	# We pass the PackedVector2Array to draw the shape.
-	print(texture.get_image().get_data().size())
 	draw_polygon(head, [ godot_blue ], [], texture)
-	print(texture.get_image().get_data().size())
+
 
 func _ready():
+	await RenderingServer.frame_post_draw
+	print($SubViewport2.get_texture().get_image().save_png("res://Screenshot.png")
+)
+	$Sprite2D.texture = $SubViewport2.get_texture()
+#	print($Polygon2D.polygon)
+#	print(Geometry2D.decompose_polygon_in_convex($Polygon2D.polygon))
+#	print($Polygon2D.polygon.to_byte_array().size())
+	var image1 = Image.create(15,16,false,Image.FORMAT_RGBA8)
+	image1.fill(Color.BURLYWOOD)
+	image1.set_data(15,16,false,Image.FORMAT_RGBA8, $Polygon2D.polygon.to_byte_array())
+	image1.save_png("res://polygon.png")
+	
+	
 	head = float_array_to_Vector2Array(coords_head);
-	var dnamicImageFormatLoader = DynamicImageFormatLoaderExtension.new()
-	dnamicImageFormatLoader.add_custom_loader()
-	var image = Image.new()
-	print(image.load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs1"))
-	$Sprite2D.texture = load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs")
+	
+	var dynamicImageFormatLoader = DynamicImageFormatLoaderExtension.new()
+	dynamicImageFormatLoader.add_format_loader()
+	
+	$Sprite2D.texture = load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs1")
+#	var image = Image.new()
+#	print(image.load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs1"))
 	pass
 
 
@@ -61,7 +75,7 @@ func _on_button_pressed(extra_arg_0):
 			"picture": "res://tools/assets/pencil-create.png"
 		}
 	]
-#	var loaded_resource = ResourceLoader.load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAACQAAAByZXM6Ly90b29scy9hc3NldHMvcGVuY2lsLWNyZWF0ZS5wbmc=.abs")
+	var loaded_resource = ResourceLoader.load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAACQAAAByZXM6Ly90b29scy9hc3NldHMvcGVuY2lsLWNyZWF0ZS5wbmc=.abs")
 	images.map(func(image):
 		var data = Marshalls.variant_to_base64(image)
 		var resource_path = "res://base64/{data}.abs".format([["data", data]])
