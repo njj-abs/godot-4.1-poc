@@ -2,6 +2,10 @@ extends Node2D
 
 
 func _ready():
+	var dnamicImageFormatLoader = DynamicImageFormatLoaderExtension.new()
+	dnamicImageFormatLoader.add_custom_loader()
+	var image = Image.new()
+	print(image.load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs1"))
 	$Sprite2D.texture = load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs")
 	pass
 
