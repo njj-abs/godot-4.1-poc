@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 CustomImageLoader="*res://resources/customImageLoader.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg", "res://addons/sprite_painter/plugin.cfg")
