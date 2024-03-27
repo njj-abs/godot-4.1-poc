@@ -20,7 +20,7 @@ CustomImageLoader="*res://resources/customImageLoader.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
+enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg", "res://addons/sprite_painter/plugin.cfg")
 
 [gui]
 
