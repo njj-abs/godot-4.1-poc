@@ -16,6 +16,7 @@ resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_0pudh")
 
 [sub_resource type="QuadMesh" id="QuadMesh_lmlxy"]
+size = Vector2(6, 5)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7c7xm")
@@ -25,13 +26,15 @@ position = Vector2(368, 200)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(250, 100)
+size = Vector2i(250, 200)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SubViewport"]
 clip_contents = false
+custom_minimum_size = Vector2(0, 200)
 offset_right = 150.0
 offset_bottom = 100.0
 bbcode_enabled = true
+fit_content = true
 autowrap_mode = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -39,6 +42,7 @@ clip_contents = false
 offset_right = 150.0
 offset_bottom = 100.0
 bbcode_enabled = true
+fit_content = true
 autowrap_mode = 0
 
 [node name="Node3D" type="Node3D" parent="."]
@@ -53,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 0.224951, 0.97437, 0, -0.97437, 0.224951, 0,
 mesh = SubResource("PlaneMesh_wcbei")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0, 3.16167, 2.9139)
+transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0, 0.722632, -0.521075)
 material_overlay = SubResource("StandardMaterial3D_eploi")
 mesh = SubResource("QuadMesh_lmlxy")
 

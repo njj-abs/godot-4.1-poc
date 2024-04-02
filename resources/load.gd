@@ -32,31 +32,56 @@ func _draw():
 	# We pass the PackedVector2Array to draw the shape.
 	draw_polygon(head, [ godot_blue ], [], texture)
 
+var packed : PackedVector2Array
+
+
 func _ready():
 	var image := Image.create(200, 200, false, Image.FORMAT_RGBA8)  # Create an image with width 200 and height 200 pixels
 	var byte_data = image.get_data()  # Get the pixel data of the image
 
-	# Draw a circle in the center of the image with a radius of 50 and white color (you can adjust the radius and color values)
+	# Draw a portion of the circle in the center of the image with a radius of 100 and black color
 	var radius = 100
 	var center_x = image.get_width() / 2
 	var center_y = image.get_height() / 2
+	
+	var start_angle = 0
+	var end_angle = 0
 
-	for y in range(image.get_height()):
+	# For full circle (360 degrees)
+	start_angle = 0
+	end_angle = 45
+
+	for y in range(image.get_height()):  
 		for x in range(image.get_width()):
-		# Calculate the distance from the center of the image
-			var dist = sqrt((x - center_x)**2 + (y - center_y)**2)
+			# Calculate the angle from the center of the image
+			var angle = atan2( x - center_x, y - center_y)
+			if angle < 0:
+				angle += PI * 2  # Ensure positive angle
 
-		# Check if the pixel is within the circle radius
-			if dist <= radius:
-				# Set the pixel to white (replace 255 with your desired color value)
-				var offset = (y * image.get_width() + x) * 4  # Calculate the offset for RGBA data
-				byte_data[offset] = 255  # Set red channel
-				byte_data[offset + 1] = 255  # Set green channel
-				byte_data[offset + 2] = 255  # Set blue channel
-				byte_data[offset + 3] = 255  # Set alpha channel (transparency)
+			# Check if the angle is within the specified range
+			if angle >= deg_to_rad(start_angle) and angle <= deg_to_rad(end_angle):
+				# Calculate the distance from the center of the image
+				var dist = sqrt((x - center_x)**2 + (y - center_y)**2)
+
+				# Check if the pixel is within the circle radius
+				if dist <= radius:
+					# Set the pixel to black
+					var offset = (y * image.get_width() + x) * 4  # Calculate the offset for RGBA data
+					byte_data[offset] = 0  # Set red channel to 0 (black)
+					byte_data[offset + 1] = 0  # Set green channel to 0 (black)
+					byte_data[offset + 2] = 0  # Set blue channel to 0 (black)
+					byte_data[offset + 3] = 255  # Set alpha channel (transparency)
 
 	image.set_data(200, 200, false, Image.FORMAT_RGBA8, byte_data)  # Set the modified pixel data back to the image
-	image.save_png("res://polygon.png")
+	image.save_png("res://semicircle.png")
+	print(image.get_data().size())
+	var image1 = Image.load_from_file("res://chapathi.png")
+	image1.convert(Image.FORMAT_RGBA8)
+	
+	var bImage = image.create(200,200, false, Image.FORMAT_RGBA8)
+	bImage.blit_rect_mask(image1, image,Rect2i(0, 0, 200, 200), Vector2i(0, 0))
+	bImage.save_png("res://mask.png")
+	$SubViewport/RichTextLabel.add_image(ImageTexture.create_from_image(bImage))
 	# You can now use the image variable for further processing or display
 	# For example, to display the image in a TextureRect:
 	var texture_rect = TextureRect.new()
@@ -87,6 +112,7 @@ func _ready():
 ##	var image = Image.new()
 ##	print(image.load("res://base64/GwAAAAEAAAAEAAAABwAAAHBpY3R1cmUABAAAABsAAAByZXM6Ly90b29scy9hc3NldHMvdGltZS5wbmcA.abs1"))
 #	pass
+
 
 
 func _on_button_pressed(extra_arg_0):
